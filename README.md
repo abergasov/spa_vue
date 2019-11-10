@@ -1,5 +1,10 @@
 # spa_vue
 
+## Quick
+```
+git clone git@github.com:abergasov/spa_vue.git && cd spa_vue && npm install && npm run dev
+```
+
 ## Installation
 ```shell script
 # install dependencies
