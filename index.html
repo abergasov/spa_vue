@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>SPA_APP</title>
+  </head>
+  <body>
+    <div id="app_container">
+      <input type="hidden" id="app_name" v-bind:value="app">
+      <input type="hidden" id="product_count" value="666">
+      <input type="hidden" id="shop_name" value="123">
+      <input type="hidden" id="csrf_name" value="todoIt">
+      <input type="hidden" id="csrf_value" value="todoIt">
+      <polaris-tabs>
+        <template slot="Index tab">
+          <tab_index></tab_index>
+        </template>
+        <template slot="Instruction">
+          <tab_instruction></tab_instruction>
+        </template>
+        <template slot="Support">
+          <tab_contact></tab_contact>
+        </template>
+      </polaris-tabs>
+    </div>
+  </body>
+  <script src="/dist/build.js"></script>
+</html>
