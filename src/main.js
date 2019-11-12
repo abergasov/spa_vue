@@ -49,29 +49,34 @@ new Vue({
     this.getSign(() => {
       this.getCollection();
       this.getProducts();
+      this.getPosts();
     });
   },
   methods: {
     getCollection: function () {
-      window.getData(this.$store.getters.app, 'collections', (resp) => {
-        let data = resp.data;
-        if (data && data.ok) {
-          console.log('Sample collection data:', data);
-        }
+      this.getSampleData('collections', (resp) => {
+        console.log('Sample collection here:', resp.data)
       });
     },
     getProducts: function () {
-      window.getData(this.$store.getters.app, 'products', (resp) => {
-        let data = resp.data;
-        if (data && data.ok) {
-          console.log('Sample product data:', data);
-        }
+      this.getSampleData('products', (resp) => {
+        console.log('Sample product here:', resp.data)
       });
     },
+    getPosts: function () {
+      this.getSampleData('posts', (resp) => {
+        console.log('Sample post here:', resp.data)
+      });
+    },
+    getSampleData: function (action, callback) {
+      window.getData(action, callback);
+    },
+
     getSign: function (onSuccess) {
       window.ajaxRequest('/get_key', {app: this.$store.getters.app}, (resp) => {
         let data = resp.data;
         if (data && data.ok) {
+          debugger;
           this.$store.commit("set_sign", data.sign);
           if (typeof onSuccess === "function") {
             return onSuccess();

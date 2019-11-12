@@ -67,7 +67,7 @@ window.ajaxRequest = function (URL, payload, onSuccess, useBodyFormData) {
     .catch(error => window.sendErrToDev(error));
 };
 
-window.getData = function (app, dataType, onSuccess) {
+window.getData = function (dataType, onSuccess) {
   let url = null;
   switch (dataType) {
     case 'products':
@@ -76,6 +76,13 @@ window.getData = function (app, dataType, onSuccess) {
     case 'collections':
       url = '/random_collections';
       break;
+    case 'posts':
+      url = '/random_post_list';
+      break;
+  }
+  let app = 'default';
+  if (window.store) {
+    app = window.store.getters.app;
   }
   window.ajaxRequest(url, {app: app}, onSuccess);
 };
