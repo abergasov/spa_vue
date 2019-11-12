@@ -46,14 +46,36 @@ new Vue({
     app: 'default',
   },
   created: function () {
-    this.getSign();
+    this.getSign(() => {
+      this.getCollection();
+      this.getProducts();
+    });
   },
   methods: {
-    getSign: function () {
+    getCollection: function () {
+      window.getData(this.$store.getters.app, 'collections', (resp) => {
+        let data = resp.data;
+        if (data && data.ok) {
+          console.log('Sample collection data:', data);
+        }
+      });
+    },
+    getProducts: function () {
+      window.getData(this.$store.getters.app, 'products', (resp) => {
+        let data = resp.data;
+        if (data && data.ok) {
+          console.log('Sample product data:', data);
+        }
+      });
+    },
+    getSign: function (onSuccess) {
       window.ajaxRequest('/get_key', {app: this.$store.getters.app}, (resp) => {
         let data = resp.data;
         if (data && data.ok) {
           this.$store.commit("set_sign", data.sign);
+          if (typeof onSuccess === "function") {
+            return onSuccess();
+          }
         }
       });
     }

@@ -7,7 +7,3 @@
         name: "tab_index"
     }
 </script>
-
-<style scoped>
-
-</style>

@@ -66,3 +66,16 @@ window.ajaxRequest = function (URL, payload, onSuccess, useBodyFormData) {
     })
     .catch(error => window.sendErrToDev(error));
 };
+
+window.getData = function (app, dataType, onSuccess) {
+  let url = null;
+  switch (dataType) {
+    case 'products':
+      url = '/random_products';
+      break;
+    case 'collections':
+      url = '/random_collections';
+      break;
+  }
+  window.ajaxRequest(url, {app: app}, onSuccess);
+};
