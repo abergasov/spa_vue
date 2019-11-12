@@ -27,24 +27,34 @@ window.setToken = function () {
       .catch(error => console.info('JS error report submission failed!', error));
   };
 
-window.ajaxRequest = function (URL, dataObject, onSuccess) {
+/**
+ * @param URL string
+ * @param payload
+ * @param onSuccess
+ * @param useBodyFormData if true - request will send as form, else as json
+ * @returns {boolean}
+ */
+window.ajaxRequest = function (URL, payload, onSuccess, useBodyFormData) {
   if (empty(URL)) {
     return false;
   }
   URL = 'https://proxy.belformag.ru' + URL;
-  let bodyFormData = new FormData();
-  for (let i in dataObject) {
-    if (!dataObject.hasOwnProperty(i)) {
-      continue;
+  if (useBodyFormData === true) {
+    let bodyFormData = new FormData();
+    for (let i in payload) {
+      if (!payload.hasOwnProperty(i)) {
+        continue;
+      }
+      bodyFormData.append(i, payload[i]);
     }
-    bodyFormData.append(i, dataObject[i]);
+    payload = bodyFormData;
   }
 
   if (window.store) {
     window.store.commit("set_pending", true);
   }
 
-  axios.post(URL, bodyFormData, window.setToken())
+  axios.post(URL, payload, window.setToken())
     .then(response => {
       if (window.store) {
         window.store.commit("set_pending", false);

@@ -38,5 +38,12 @@ src/styles.scss - общие стили для spa
 
 Во время отправления запросов на API сервер через обертку, переменная автоматически меняет свой статус
 ```
-window.ajaxRequest(string '/contact', object params, callable);
+/**
+ * @param URL string
+ * @param payload
+ * @param onSuccess
+ * @param useBodyFormData if true - request will send as form, else as json
+ * @returns {boolean}
+ */
+window.ajaxRequest(string '/contact', object params, callable, useBodyFormData);
 ```
