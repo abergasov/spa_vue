@@ -86,3 +86,12 @@ window.getData = function (dataType, onSuccess) {
   }
   window.ajaxRequest(url, {app: app}, onSuccess);
 };
+
+// ---
+window.info = function (text) {
+  console.log(text);
+};
+
+window.error = function (text) {
+  console.error(text);
+};
