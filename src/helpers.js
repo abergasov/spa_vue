@@ -95,3 +95,8 @@ window.info = function (text) {
 window.error = function (text) {
   console.error(text);
 };
+
+window.infoModal = function (infoText, closeButtonText) {
+  console.log('info modal message', infoText);
+  console.log('info modal button text', closeButtonText);
+};
